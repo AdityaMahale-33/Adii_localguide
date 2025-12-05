@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ankola Local Guide | Beaches · Temples · Food</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* ---------- GLOBAL STYLES ---------- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- HEADER + NAV ---------- */
+        header {
+            background: #0b1220;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            font-size: 0.95rem;
+        }
+
+        nav a {
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+            background: #ffffff;
+            color: #0b1220;
+        }
+
+        /* ---------- HERO SECTION ---------- */
+        .hero {
+            background: linear-gradient(135deg, #0b1220, #1f2937);
+            color: #fff;
+            padding: 60px 20px 70px;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            max-width: 480px;
+        }
+
+        .hero-highlight {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-outline {
+            border-radius: 999px;
+            padding: 9px 18px;
+            font-size: 0.9rem;
+            border: 1px solid #fff;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #facc15;
+            border-color: #facc15;
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: #eab308;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            background: #020617;
+        }
+
+        .hero-card {
+            background: #020617;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-card h2 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .hero-card small {
+            color: #9ca3af;
+            font-size: 0.75rem;
+        }
+
+        .hero-stats {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+
+        .hero-stat {
+            padding: 10px;
+            border-radius: 12px;
+            background: #0b1120;
+            text-align: center;
+        }
+
+        .hero-stat span {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* ---------- MAIN LAYOUT ---------- */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px 50px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            margin-bottom: 15px;
+        }
+
+        .section-title h2 {
+            font-size: 1.5rem;
+        }
+
+        .section-title p {
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        /* ---------- PLACES GRID ---------- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 12px 14px 14px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            border-radius: 999px;
+            background: #e5e7eb;
+            margin-bottom: 6px;
+        }
+
+        .card-body p {
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        .tag-line {
+            font-size: 0.75rem;
+            margin-top: 6px;
+            color: #9ca3af;
+        }
+
+        /* ---------- FOOD LIST ---------- */
+        .food-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .food-item {
+            background: #ffffff;
+            padding: 10px 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        }
+
+        .food-item h3 {
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .food-item small {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        /* ---------- TRANSPORT & TIPS ---------- */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+        }
+
+        .info-box {
+            background: #ffffff;
+            padding: 14px 16px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+            font-size: 0.9rem;
+        }
+
+        .info-box ul {
+            margin-left: 18px;
+            margin-top: 5px;
+        }
+
+        .info-box li {
+            margin-bottom: 6px;
+        }
+
+        /* ---------- CONTACT SECTION ---------- */
+        .contact-box {
+            background: #020617;
+            color: #f9fafb;
+            padding: 20px 18px;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: 2fr 1.5fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 6px;
+        }
+
+        .contact-box p {
+            font-size: 0.9rem;
+            color: #e5e7eb;
+        }
+
+        .contact-details {
+            font-size: 0.85rem;
+        }
+
+        .contact-details div {
+            margin-bottom: 3px;
+        }
+
+        .pill {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px dashed #9ca3af;
+            font-size: 0.75rem;
+            color: #d1d5db;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            background: #020617;
+            color: #9ca3af;
+            text-align: center;
+            padding: 14px 10px;
+            font-size: 0.8rem;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 800px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                display: none; /* simple mobile nav */
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAV -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Ankola Local Guide</div>
+            <nav>
+                <ul>
+                    <li><a href="#places">Beaches</a></li>
+                    <li><a href="#temples">Temples</a></li>
+                    <li><a href="#food">Food</a></li>
+                    <li><a href="#transport">Transport</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div>
+                <div class="hero-highlight">Coastal Town • Ankola, Karnataka</div>
+                <h1>Discover Quiet Beaches & Temples of Ankola</h1>
+                <p>
+                    A simple local guide to Ankola – clean uncrowded beaches, old temples and homely
+                    Konkan food. Perfect for a peaceful weekend away from city rush.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#places" class="btn-primary">Explore Beaches</a>
+                    <a href="#temples" class="btn-outline">Visit Temples</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h2>Today’s Snapshot</h2>
+                <small>Best months to visit: August – March (less rain, good for beach walks).</small>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span>4+</span>
+                        Scenic Beaches
+                    </div>
+                    <div class="hero-stat">
+                        <span>5+</span>
+                        Major Temples
+                    </div>
+                    <div class="hero-stat">
+                        <span>2–3</span>
+                        Days Ideal Trip
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- BEACHES SECTION -->
+        <section id="places">
+            <div class="section-title">
+                <h2>Beaches Around Ankola</h2>
+                <p>Most beaches here are calm and less crowded. Good for walks, sunsets and photography.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Honey Beach -->
+                <article class="card">
+                    <img src="https://i.pinimg.com/564x/6d/25/3d/6d253d5a2b5af8e48fb9c7d8d4034a43.jpg" alt="Honey Beach Ankola">
+                    <div class="card-body">
+                        <div class="badge">Secluded</div>
+                        <div class="card-title">Honey Beach (Honnebail)</div>
+                        <p>
+                            Small golden-sand beach surrounded by rocks and greenery. Feels like a private cove,
+                            perfect for quiet mornings and evenings.
+                        </p>
+                        <div class="tag-line">Best time: Sunrise & sunset</div>
+                    </div>
+                </article>
+
+                <!-- Nadibag Beach -->
+                <article class="card">
+                    <img src="https://i.pinimg.com/564x/8a/5f/0a/8a5f0a90c65a2e3d68d6a4b1d2a5aa4a.jpg" alt="Nadibag Beach Ankola">
+                    <div class="card-body">
+                        <div class="badge">River & Sea</div>
+                        <div class="card-title">Nadibag Beach</div>
+                        <p>
+                            A beautiful spot where a small river meets the Arabian Sea. Wide sand,
+                            gentle waves and great views from nearby rocks.
+                        </p>
+                        <div class="tag-line">Good for: Photos, long walks</div>
+                    </div>
+                </article>
+
+                <!-- Keni / Other Beach -->
+                <article class="card">
+                    <img src="https://i.pinimg.com/564x/9b/f2/b8/9bf2b8bc56d0b5f4a93e1e547c4d1e09.jpg" alt="Keni Beach Ankola">
+                    <div class="card-body">
+                        <div class="badge">Offbeat</div>
+                        <div class="card-title">Keni / Belekeri Side</div>
+                        <p>
+                            Less commercial and still raw. Ideal if you like silent stretches of sand,
+                            rocks and just the sound of waves.
+                        </p>
+                        <div class="tag-line">Carry water & snacks – limited shops</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- TEMPLES SECTION -->
+        <section id="temples">
+            <div class="section-title">
+                <h2>Temples & Spiritual Spots</h2>
+                <p>Ankola is also known for old coastal temples with strong local traditions.</p>
+            </div>
+
+            <div class="card-grid">
+                <article class="card">
+                    <img src="https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg" alt="Shri Aryadurga Temple style">
+                    <div class="card-body">
+                        <div class="badge">Heritage</div>
+                        <div class="card-title">Shri Aryadurga Temple</div>
+                        <p>
+                            Popular coastal temple dedicated to Goddess Aryadurga.
+                            Visit in the morning for a peaceful darshan and cool sea breeze.
+                        </p>
+                        <div class="tag-line">Dress modestly, remove footwear outside</div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://images.pexels.com/photos/7005471/pexels-photo-7005471.jpeg" alt="Mahamaya Temple style">
+                    <div class="card-body">
+                        <div class="badge">Kuladevata</div>
+                        <div class="card-title">Lakshminarayan Mahamaya Temple</div>
+                        <p>
+                            Important temple for many local families. Calm courtyard,
+                            traditional architecture and regular pujas.
+                        </p>
+                        <div class="tag-line">Evening aarti is a good time to visit</div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="Hill view near Ankola">
+                    <div class="card-body">
+                        <div class="badge">Viewpoint</div>
+                        <div class="card-title">Basakal Gudda / Nandi Point</div>
+                        <p>
+                            Small hill point near Ankola with a beautiful view of the town,
+                            greenery and distant sea. Nice for a short drive.
+                        </p>
+                        <div class="tag-line">Best time: Late afternoon</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- FOOD SECTION -->
+        <section id="food">
+            <div class="section-title">
+                <h2>Local Food to Try in Ankola</h2>
+                <p>Mixture of coastal Konkan flavours and classic Karnataka snacks.</p>
+            </div>
+
+            <div class="food-list">
+                <div class="food-item">
+                    <h3>Konkani Fish Curry & Rice</h3>
+                    <small>Try at: Small local seafood hotels on highway or near town</small>
+                    <p>
+                        Spicy tangy fish curry (often bangda / mackerel) with steamed rice.
+                        Coconut, tamarind and local masala give a strong coastal flavour.
+                    </p>
+                </div>
+
+                <div class="food-item">
+                    <h3>Idli, Dosa & Buns Breakfast</h3>
+                    <small>Try at: Popular darshinis & family restaurants in town</small>
+                    <p>
+                        Soft idlis, crispy dosas, mangalore buns, vada and strong filter coffee –
+                        perfect start before you head to the beach.
+                    </p>
+                </div>
+
+                <div class="food-item">
+                    <h3>Veg / Fish Thali</h3>
+                    <small>Try at: Highway restaurants & local hotels</small>
+                    <p>
+                        Simple homely thali with rice, sambar, sabzi, chutney and sometimes fried fish.
+                        Good option if you want to taste everything in one plate.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANSPORT + TIPS -->
+        <section id="transport">
+            <div class="section-title">
+                <h2>Getting Around Ankola</h2>
+                <p>Small town – most places are reachable by road within 20–30 minutes.</p>
+            </div>
+
+            <div class="two-column">
+                <div class="info-box">
+                    <h3>Transport Options</h3>
+                    <ul>
+                        <li><strong>Auto / Rikshaw:</strong> Good for short distances inside town. Fix price or ask to use meter.</li>
+                        <li><strong>Local Bus:</strong> Connects Ankola with nearby places like Gokarna, Kumta, Karwar.</li>
+                        <li><strong>Cab / Taxi:</strong> Useful if you plan to cover multiple beaches in one day.</li>
+                        <li><strong>Own Vehicle / Bike:</strong> Best flexibility. Roads are generally good but be careful at night.</li>
+                    </ul>
+                </div>
+
+                <div class="info-box" id="tips">
+                    <h3>Quick Tips for Visitors</h3>
+                    <ul>
+                        <li>Carry water and some snacks – many beaches are quiet with few shops.</li>
+                        <li>Respect local culture at temples – simple clothes & silence inside.</li>
+                        <li>Sun can be strong – cap, sunglasses and sunscreen help a lot.</li>
+                        <li>Keep your phone charged; network may be weak near some beaches.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="section-title">
+                <h2>Contact the Local Guide</h2>
+                <p>You can edit this with your own details if you are the guide from Ankola.</p>
+            </div>
+
+            <div class="contact-box">
+                <div>
+                    <h3>Need Help Planning Ankola Trip?</h3>
+                    <p>
+                        Share this page with friends or add your number / Instagram handle below
+                        so people can ask you for stay options, routes and hidden spots.
+                    </p>
+                    <div class="pill">Edit this text with your own info.</div>
+                </div>
+                <div class="contact-details">
+                    <div><strong>Name:</strong> Your Name Here</div>
+                    <div><strong>Email:</strong> you@example.com</div>
+                    <div><strong>Instagram:</strong> @ankola_local_guide</div>
+                    <div><strong>Phone:</strong> +91-XXXXXXXX
